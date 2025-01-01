@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X8 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="13.3617mm" height="7.8794mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 105 62"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <font id="FontID1" horiz-adv-x="614" font-variant="normal" style="fill-rule:nonzero" font-weight="400">
+	<font-face 
+		font-family="Australian Signature">
+		<font-face-src>
+			<font-face-name name="Australian Signature"/>
+		</font-face-src>
+	</font-face>
+   <missing-glyph><path d="M0 0z"/></missing-glyph>
+   <glyph unicode="m" horiz-adv-x="467" d="M525.333 180.834c-30.666,0 -66.3319,-101.834 -106.331,-101.834 -10.3353,0 -12.0005,13.6657 -12.0005,33.0024 0,10.6666 0.499146,22.8307 0.499146,35.4981 0,42.3352 -6.16593,88.8355 -59.1677,88.8355 -36.6642,0 -78.0011,-79.8341 -93.4998,-92.0023 1.16607,17.9986 2.83549,37.8345 2.83549,55.8331 0,32.499 -3.83378,84.8339 -42.0038,84.8339 -0.830513,0 -1.833,0 -2.66351,0 -31.9999,0 -54.8348,-23.5018 -73.5004,-41.9996 -3.83378,19.9994 -22.4993,32.9982 -45.0029,32.9982 -58.9999,0 -110.5,-221.831 -110.5,-280.998 0,-22.4993 16.669,-40.5022 39.5039,-40.5022l1.99659 0c18.6698,1.66941 37.5031,16.5012 37.5031,38.5014 0,1.50163 -0.335561,2.83549 -0.503341,3.83378 18.502,58.0017 84.6703,192.335 135.835,223.332 -12.4996,-61.999 -32.9982,-155.998 -32.9982,-178.166 0,-24.8315 35.1668,-38.5014 53.6645,-38.5014 56.1687,0 114.502,172.336 127.333,172.336 0,0 -10.3311,-44.6673 -10.3311,-88.3321 0,-41.9996 15.6665,-85.5008 61.8312,-85.5008 61.6677,0 145.168,111.167 145.168,155.167 0,10.1633 -6.83285,23.6654 -17.6673,23.6654l0 0z"/>
+  </font>
+  <font id="FontID0" horiz-adv-x="766" font-variant="normal" style="fill-rule:nonzero" font-style="normal" font-weight="700">
+	<font-face 
+		font-family="Montserrat">
+		<font-face-src>
+			<font-face-name name="Montserrat Bold"/>
+		</font-face-src>
+	</font-face>
+   <missing-glyph><path d="M0 0z"/></missing-glyph>
+   <glyph unicode="2" horiz-adv-x="590" d="M32.9953 0l0 105.007 270.019 254.983c21.3043,19.3323 36.9744,36.6927 46.9751,52.0107 10.0007,15.318 16.8322,29.3331 20.4944,42.01 3.69744,12.6417 5.52856,24.3327 5.52856,35.0025 0,27.9949 -9.50771,49.4753 -28.5231,64.4764 -18.9802,15.0011 -46.8343,22.5016 -83.4918,22.5016 -29.3331,0 -56.4829,-5.66941 -81.4846,-17.0082 -25.0018,-11.3036 -46.1652,-28.9809 -63.5256,-52.9967l-118.001 76.0265c26.692,40.0028 64.0186,71.66 112.015,94.9715 47.9963,23.3467 103.317,35.0025 165.998,35.0025 52.0107,0 97.5069,-8.48651 136.488,-25.4948 39.0168,-17.0082 69.3359,-40.8127 91.0275,-71.4839 21.6565,-30.6712 32.5023,-67.3287 32.5023,-110.008 0,-22.6777 -2.85231,-45.1792 -8.52173,-67.5048 -5.66941,-22.3255 -17.0082,-45.8131 -33.9813,-70.4979 -17.0082,-24.6496 -41.8339,-52.3276 -74.5123,-82.9988l-223.995 -211.001 -31.0233 59.0182 395.028 0 0 -132.016 -529.016 0z"/>
+  </font>
+  <style type="text/css">
+   <![CDATA[
+    @font-face { font-family:"Australian Signature";font-variant:normal;font-weight:normal;src:url("#FontID1") format(svg)}
+    @font-face { font-family:"Montserrat";font-variant:normal;font-style:normal;font-weight:bold;src:url("#FontID0") format(svg)}
+    .fil1 {fill:#B2B3B3}
+    .fil0 {fill:#727271}
+    .fil2 {fill:url(#id2)}
+    .fnt0 {font-weight:bold;font-size:22.4218px;font-family:'Montserrat'}
+    .fnt1 {font-weight:normal;font-size:188.235px;font-family:'Australian Signature'}
+   ]]>
+  </style>
+    <mask id="id0">
+  <radialGradient id="id1" gradientUnits="userSpaceOnUse" cx="54.0481" cy="51.4252" r="0" fx="54.0481" fy="51.4252">
+   <stop offset="0" style="stop-opacity:1; stop-color:white"/>
+   <stop offset="1" style="stop-opacity:0; stop-color:white"/>
+  </radialGradient>
+     <rect style="fill:url(#id1)" x="53" y="51" width="51.3226" height="6.02272"/>
+    </mask>
+  <linearGradient id="id2" gradientUnits="userSpaceOnUse" x1="1.44424" y1="31.1008" x2="106.668" y2="31.1006">
+   <stop offset="0" style="stop-opacity:1; stop-color:#00A0E3"/>
+   <stop offset="0.219608" style="stop-opacity:1; stop-color:#393185"/>
+   <stop offset="0.431373" style="stop-opacity:1; stop-color:#E5097F"/>
+   <stop offset="0.690196" style="stop-opacity:1; stop-color:#E31E24"/>
+   <stop offset="1" style="stop-opacity:1; stop-color:#FFED00"/>
+  </linearGradient>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_2224840238240">
+   <text x="93" y="16"  class="fil0 fnt0">2</text>
+   <path class="fil1" style="mask:url(#id0)" d="M79 51c14,0 25,1 25,3 0,1 -11,2 -25,2 -14,0 -25,-1 -25,-2 0,-2 11,-3 25,-3z"/>
+   <text x="3" y="54"  class="fil2 fnt1">m</text>
+  </g>
+ </g>
+</svg>

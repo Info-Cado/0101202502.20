@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import './styles/loading.css';
+
+/* Add background pattern */
+body {
+  background-image: url('/shutterstock_2480856603.eps');
+  background-repeat: repeat;
+  background-position: center;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+/* Add overlay to ensure content remains readable */
+.page-content {
+  position: relative;
+  z-index: 1;
+}
+
+.page-content::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  z-index: -1;
+}
+
+@layer utilities {
+  .animate-progress-indeterminate {
+    animation: progress-indeterminate 1.5s ease-in-out infinite;
+  }
+}
