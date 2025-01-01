@@ -1,6 +1,7 @@
 import { ColorSelection, Point } from '../types/image';
 import { colorsAreClose, hexToRgb } from './colorUtils';
 import { activity } from '../lib/activity';
+import { supabase } from '../lib/supabase';
 
 export const drawImageToCanvas = (
   canvas: HTMLCanvasElement,
@@ -119,100 +120,131 @@ export const downloadMatchingImage = async (
     // Draw the image below header
     ctx.drawImage(img, 0, headerHeight);
 
-    // Draw color changes if available
-    if (colorChanges?.length) {
-      const colorFontSize = Math.round(canvas.height * 0.014); // 3% text height for color changes
-      const padding = colorFontSize * 0.5; // Reduced padding
-      const rowHeight = colorFontSize * 1.5; // Slightly increased for swatches
-      const swatchSize = colorFontSize * 0.8; // Size of color swatch
-      
-      ctx.font = `${colorFontSize}px Arial`;
-      const columnPadding = colorFontSize * 0.5;
-      
-      // Calculate column widths including space for swatches
-      const swatchPadding = swatchSize + (colorFontSize * 0.3); // Space between swatch and text
-      const maxNameWidth = Math.max(...colorChanges.map(change => 
-        ctx.measureText(change.name).width
-      )) + swatchPadding;
-      const maxColorWidth = Math.max(...colorChanges.map(change => 
-        ctx.measureText(change.newColor).width
-      )) + swatchPadding;
-      const arrowWidth = ctx.measureText('→').width;
-      
-      // Calculate table dimensions
-      const tableWidth = maxNameWidth + arrowWidth + maxColorWidth + (columnPadding * 4);
-      const tableHeight = (rowHeight * colorChanges.length) + (padding * 2);
-      
-      // Draw table background
-      ctx.fillStyle = 'white';
-      ctx.fillRect(0, headerHeight, tableWidth, tableHeight);
+    // Get the design ID first
+    const { data: design } = await supabase
+      .from('designs')
+      .select('id')
+      .eq('design_number', designNumber)
+      .single();
 
-      // Draw color changes
-      colorChanges.forEach((change, index) => {
-        const y = headerHeight + padding + (index * rowHeight) + (colorFontSize * 0.5);
+    if (design) {
+      // Get default colors for this specific design
+      const { data: defaultColors } = await supabase
+        .from('design_default_colors')
+        .select('hex, name')
+        .eq('design_id', design.id)
+        .order('created_at', { ascending: true });
+
+      if (defaultColors) {
+        // Create a map of color changes for easy lookup
+        const colorChangeMap = new Map(
+          colorChanges?.map(change => [change.hex, change]) || []
+        );
+
+        // Create array of all colors to display
+        const allColorChanges = defaultColors.map(defaultColor => {
+          const change = colorChangeMap.get(defaultColor.hex);
+          return {
+            name: defaultColor.name,
+            newColor: change ? change.newColor : defaultColor.name,
+            hex: defaultColor.hex,
+            newHex: change ? change.newHex : defaultColor.hex
+          };
+        });
+
+        const colorFontSize = Math.round(canvas.height * 0.014);
+        const padding = colorFontSize * 0.5;
+        const rowHeight = colorFontSize * 1.5;
+        const swatchSize = colorFontSize * 0.8;
         
-        // Draw original color swatch using hex value
-        ctx.fillStyle = change.hex;
-        ctx.fillRect(
-          columnPadding, 
-          y - (swatchSize / 2), 
-          swatchSize, 
-          swatchSize
-        );
+        ctx.font = `${colorFontSize}px Arial`;
+        const columnPadding = colorFontSize * 0.5;
         
-        // Draw swatch border
-        ctx.strokeStyle = '#000000';
-        ctx.lineWidth = 1;
-        ctx.strokeRect(
-          columnPadding, 
-          y - (swatchSize / 2), 
-          swatchSize, 
-          swatchSize
-        );
-
-        // Draw original color name
-        ctx.textAlign = 'left';
-        ctx.fillStyle = 'black';
-        ctx.fillText(
-          change.name, 
-          columnPadding + swatchSize + (colorFontSize * 0.3), 
-          y
-        );
-
-        // Draw arrow
-        ctx.textAlign = 'center';
-        ctx.fillText(
-          '→', 
-          maxNameWidth + columnPadding * 2 + arrowWidth/2, 
-          y
-        );
-
-        // Draw new color swatch using hex value
-        ctx.fillStyle = change.newHex;
-        ctx.fillRect(
-          maxNameWidth + columnPadding * 3 + arrowWidth,
-          y - (swatchSize / 2),
-          swatchSize,
-          swatchSize
-        );
+        // Calculate column widths including space for swatches
+        const swatchPadding = swatchSize + (colorFontSize * 0.3);
+        const maxNameWidth = Math.max(...allColorChanges.map(change => 
+          ctx.measureText(change.name).width
+        )) + swatchPadding;
+        const maxColorWidth = Math.max(...allColorChanges.map(change => 
+          ctx.measureText(change.newColor).width
+        )) + swatchPadding;
+        const arrowWidth = ctx.measureText('→').width;
         
-        // Draw swatch border
-        ctx.strokeRect(
-          maxNameWidth + columnPadding * 3 + arrowWidth,
-          y - (swatchSize / 2),
-          swatchSize,
-          swatchSize
-        );
+        // Calculate table dimensions
+        const tableWidth = maxNameWidth + arrowWidth + maxColorWidth + (columnPadding * 4);
+        const tableHeight = (rowHeight * allColorChanges.length) + (padding * 2);
+        
+        // Draw table background
+        ctx.fillStyle = 'white';
+        ctx.fillRect(0, headerHeight, tableWidth, tableHeight);
 
-        // Draw new color name
-        ctx.textAlign = 'left';
-        ctx.fillStyle = 'black';
-        ctx.fillText(
-          change.newColor,
-          maxNameWidth + columnPadding * 3 + arrowWidth + swatchSize + (colorFontSize * 0.3),
-          y
-        );
-      });
+        // Draw color changes
+        allColorChanges.forEach((change, index) => {
+          const y = headerHeight + padding + (index * rowHeight) + (colorFontSize * 0.5);
+          
+          // Draw original color swatch
+          ctx.fillStyle = change.hex;
+          ctx.fillRect(
+            columnPadding, 
+            y - (swatchSize / 2), 
+            swatchSize, 
+            swatchSize
+          );
+          
+          // Draw swatch border
+          ctx.strokeStyle = '#000000';
+          ctx.lineWidth = 1;
+          ctx.strokeRect(
+            columnPadding, 
+            y - (swatchSize / 2), 
+            swatchSize, 
+            swatchSize
+          );
+
+          // Draw original color name
+          ctx.textAlign = 'left';
+          ctx.fillStyle = 'black';
+          ctx.fillText(
+            change.name, 
+            columnPadding + swatchSize + (colorFontSize * 0.3), 
+            y
+          );
+
+          // Draw arrow
+          ctx.textAlign = 'center';
+          ctx.fillText(
+            '→', 
+            maxNameWidth + columnPadding * 2 + arrowWidth/2, 
+            y
+          );
+
+          // Draw new color swatch
+          ctx.fillStyle = change.newHex;
+          ctx.fillRect(
+            maxNameWidth + columnPadding * 3 + arrowWidth,
+            y - (swatchSize / 2),
+            swatchSize,
+            swatchSize
+          );
+          
+          // Draw swatch border
+          ctx.strokeRect(
+            maxNameWidth + columnPadding * 3 + arrowWidth,
+            y - (swatchSize / 2),
+            swatchSize,
+            swatchSize
+          );
+
+          // Draw new color name
+          ctx.textAlign = 'left';
+          ctx.fillStyle = 'black';
+          ctx.fillText(
+            change.newColor,
+            maxNameWidth + columnPadding * 3 + arrowWidth + swatchSize + (colorFontSize * 0.3),
+            y
+          );
+        });
+      }
     }
 
     // Create download link
